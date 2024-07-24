@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using EMedicineBE.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using System.Data.SqlClient;
 
 namespace EMedicineBE.Controllers
 {
@@ -7,5 +10,18 @@ namespace EMedicineBE.Controllers
     [ApiController]
     public class AdminController : ControllerBase
     {
-    }
-}
+        private readonly IConfiguration _configuration;
+
+        public AdminController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+        [HttpPost]
+        [Route("addUpdateMedicine")]
+        public Response addUpdateMedicine(Medicines medicines)
+        {
+            DAL dal = new DAL();
+            SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("EMedCS"));
+            Response response = dal.addUpdateMedicine(medicines, connection);
+            return response;
+        }
