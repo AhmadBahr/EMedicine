@@ -49,5 +49,17 @@ namespace EMedicineBE.Controllers
                 return StatusCode(response.StatusCode, response);
             }
         }
+        [HttpPost]
+        [Route("login")]
+        public Response Login(Users users)
+        {
+            Response response = new Response();
+            DAL dal = new DAL();
+            using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("EMedCS")))
+            {
+                response = dal.login(users, connection);
+            }
+            return response;
+        }
     }
 }
