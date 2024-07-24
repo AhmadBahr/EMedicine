@@ -122,4 +122,28 @@ namespace EMedicineBE.Models
         }
         return response;
     }
+    public Response updateProfile(Users users, SqlConnection connection)
+    {
+        Response response = new Response();
+        SqlCommand cmd = new SqlCommand("sp_updateProfile", connection);
+        cmd.CommandType = CommandType.StoredProcedure;
+        cmd.Parameters.AddWithValue("@FirstName", users.FirstName);
+        cmd.Parameters.AddWithValue("@LastName", users.LastName);
+        cmd.Parameters.AddWithValue("@Password", users.Password);
+        cmd.Parameters.AddWithValue("@Email", users.Email);
+        connection.Open();
+        int i = cmd.ExecuteNonQuery();
+        connection.Close();
+        if (i > 0)
+        {
+            response.StatusCode = 200;
+            response.StatusMessage = "Profile updated successfully";
+        }
+        else
+        {
+            response.StatusCode = 100;
+            response.StatusMessage = "Failed to update profile";
+        }
+        return response;
+    }
 }
