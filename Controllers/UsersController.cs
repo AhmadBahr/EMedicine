@@ -16,6 +16,7 @@ namespace EMedicineBE.Controllers
         {
             _configuration = configuration;
         }
+
         [HttpPost]
         [Route("registration")]
         public IActionResult Register([FromBody] Users users)
@@ -61,6 +62,7 @@ namespace EMedicineBE.Controllers
             }
             return response;
         }
+
         [HttpPost]
         [Route("ViewUser")]
         public Response ViewUser(Users users)
@@ -70,6 +72,19 @@ namespace EMedicineBE.Controllers
             using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("EMedCS")))
             {
                 response = dal.viewUser(users, connection);
+            }
+            return response;
+        }
+
+        [HttpPost]
+        [Route("updateProfile")]
+        public Response UpdateProfile(Users users)
+        {
+            Response response = new Response();
+            DAL dal = new DAL();
+            using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("EMedCS")))
+            {
+                response = dal.updateProfile(users, connection);
             }
             return response;
         }
