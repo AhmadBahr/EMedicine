@@ -171,6 +171,26 @@ namespace EMedicineBE.Models
             response.StatusMessage = "Failed to add item to cart";
         }
         return response;
-
+    }
+    public Response placeOrder(Users users, SqlConnection connection)
+    {
+        Response response = new Response();
+        SqlCommand cmd = new SqlCommand("sp_PlaceOrder", connection);
+        cmd.CommandType = CommandType.StoredProcedure;
+        cmd.Parameters.AddWithValue("@ID", users.ID);
+        connection.Open();
+        int i = cmd.ExecuteNonQuery();
+        connection.Close();
+        if (i > 0)
+        {
+            response.StatusCode = 200;
+            response.StatusMessage = "Order placed successfully";
+        }
+        else
+        {
+            response.StatusCode = 100;
+            response.StatusMessage = "Failed to place order";
+        }
+        return response;
     }
 }
