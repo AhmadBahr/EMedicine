@@ -61,5 +61,17 @@ namespace EMedicineBE.Controllers
             }
             return response;
         }
+        [HttpPost]
+        [Route("ViewUser")]
+        public Response ViewUser(Users users)
+        {
+            Response response = new Response();
+            DAL dal = new DAL();
+            using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("EMedCS")))
+            {
+                response = dal.viewUser(users, connection);
+            }
+            return response;
+        }
     }
 }
