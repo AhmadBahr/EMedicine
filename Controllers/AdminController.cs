@@ -30,7 +30,7 @@ namespace EMedicineBE.Controllers
         public Response userList()
         {
             DAL dal = new DAL();
-            SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("EMedCS"));
+            Sqlconnection = new SqlConnection(_configuration.GetConnectionString("EMedCS"));
             Response response = dal.userList(connection);
             return response;
         }
