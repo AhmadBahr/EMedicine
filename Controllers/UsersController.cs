@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using EMedicineBE.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using System.Data.SqlClient;
 
 namespace EMedicineBE.Controllers
 {
@@ -7,5 +10,44 @@ namespace EMedicineBE.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
+        private readonly IConfiguration _configuration;
+
+        public UsersController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+        [HttpPost]
+        [Route("registration")]
+        public IActionResult Register([FromBody] Users users)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            Response response = new Response();
+            DAL dal = new DAL();
+            using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("EMedCS")))
+            {
+                try
+                {
+                    response = dal.register(users, connection);
+                }
+                catch (Exception ex)
+                {
+                    response.StatusCode = 500;
+                    response.StatusMessage = $"Exception: {ex.Message}";
+                }
+            }
+
+            if (response.StatusCode == 200)
+            {
+                return Ok(response);
+            }
+            else
+            {
+                return StatusCode(response.StatusCode, response);
+            }
+        }
     }
 }
