@@ -1,10 +1,8 @@
 ﻿using EMedicineBE.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
-
-
+using System.Data.SqlClient;
 
 namespace EMedicineBE.Controllers
 {
@@ -22,7 +20,7 @@ namespace EMedicineBE.Controllers
         [Route("addUpdateMedicine")]
         public Response addUpdateMedicine(Medicines medicines)
         {
-            DAL dal = new DAL();
+            DAL dal = new DAL(); 
             SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("EMedCS"));
             Response response = dal.addUpdateMedicine(medicines, connection);
             return response;

@@ -1,9 +1,8 @@
 ﻿using EMedicineBE.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
-
+using System.Data.SqlClient;
 
 namespace EMedicineBE.Controllers
 {

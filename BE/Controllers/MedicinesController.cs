@@ -3,10 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System.Net.NetworkInformation;
 using EMedicineBE.Models;
-using Microsoft.Data.SqlClient;
-
-
-
+using System.Data.SqlClient;
 
 namespace EMedicineBE.Controllers
 {

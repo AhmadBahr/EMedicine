@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using System.Data.SqlClient;
 using System.Data;
 
 namespace EMedicineBE.Models
@@ -109,7 +109,7 @@ namespace EMedicineBE.Models
                 user.LastName = Convert.ToString(dt.Rows[0]["LastName"]);
                 user.Email = Convert.ToString(dt.Rows[0]["Email"]);
                 user.Password = Convert.ToString(dt.Rows[0]["Password"]);
-                user.Type = Convert.ToString(dt.Rows[0]["Type"]);
+                user.Type = Convert.ToString(dt.Rows[0]["Type"]);   
                 user.Fund = Convert.ToDecimal(dt.Rows[0]["Fund"]);
                 user.CreatedOn = Convert.ToDateTime(dt.Rows[0]["CreatedOn"]);
                 response.StatusCode = 200;
