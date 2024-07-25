@@ -1,30 +1,51 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default function AdminHeader() {
+const orders = [
+    { id: 1, customer: "John Doe", date: "2024-07-22", status: "Shipped" },
+    { id: 2, customer: "Jane Smith", date: "2024-07-21", status: "Processing" },
+    { id: 3, customer: "Bob Johnson", date: "2024-07-20", status: "Delivered" },
+];
+
+export default function AdminOrders() {
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a className="navbar-brand" href="#">Admin Panel</a>
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#adminNavbar" aria-controls="adminNavbar" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse" id="adminNavbar">
-                <ul className="navbar-nav">
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/admindashboard">Dashboard</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/adminorders">Orders</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/customers">Customers</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/medicine">Medicine</Link>
-                    </li>
-                </ul>
+        <div className="container mt-5">
+            <div className="row">
+                <div className="col-md-12">
+                    <div className="card">
+                        <div className="card-header">
+                            <h2>Admin Orders</h2>
+                        </div>
+                        <div className="card-body">
+                            <div className="mb-4">
+                                <h4>Order List</h4>
+                                <div className="table-responsive">
+                                    <table className="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Customer</th>
+                                                <th>Date</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {orders.map(order => (
+                                                <tr key={order.id}>
+                                                    <td>{order.id}</td>
+                                                    <td>{order.customer}</td>
+                                                    <td>{order.date}</td>
+                                                    <td>{order.status}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </nav>
+        </div>
     );
 }

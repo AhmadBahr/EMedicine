@@ -4,9 +4,9 @@ import AdminHeader from "./AdminHeader";
 
 export default function AdminDashboard() {
     return (
-        
+
         <div className="container mt-5">
-            <AdminHeader/>
+            <AdminHeader />
             <div className="row">
                 <div className="col-md-12">
                     <div className="card">
